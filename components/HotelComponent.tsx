@@ -3,7 +3,10 @@ import FileUpload from '../components/FileUpload';
 import {parsePDF} from '@/utils/pdfParser';
 import {calculateTotalPrice} from '@/utils/calculatePrice';
 
-export const HotelComponent: React.FC = ({onTotalPriceChange}) => {
+type HotelComponentProps = {
+    onTotalPriceChange: (newPrice: number) => void;
+};
+export const HotelComponent: React.FC<HotelComponentProps> = ({onTotalPriceChange}) => {
     const [roomTypes, setRoomTypes] = useState<{ [key: string]: number }>({TWN: 0, DBL: 0, SGL: 0});
     const [prices, setPrices] = useState<{ [key: string]: number }>({TWN: 0, DBL: 0, SGL: 0});
     const [nights, setNights] = useState<number>(1);

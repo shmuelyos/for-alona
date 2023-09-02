@@ -21,24 +21,24 @@ export const parsePDF = async (file: File): Promise<{ [key: string]: number }> =
                 const textItems = textContent.items;
 
                 // Assume that table text has some common keywords (like 'Room', 'Price', etc.)
-                const tableItems = textItems.filter(item => item.str.match(/Room|Price/));
+                const tableItems = textItems.filter(item => (item as any).str.match(/Room|Price/));
 
                 // Find the vertical boundaries of the table
-                const tableMinY = Math.min(...tableItems.map(item => item.transform[5]));
-                const tableMaxY = Math.max(...tableItems.map(item => item.transform[5]));
+                const tableMinY = Math.min(...tableItems.map(item => (item as any).transform[5]));
+                const tableMaxY = Math.max(...tableItems.map(item => (item as any).transform[5]));
 
                 // Find the left boundary of the table
-                const tableMinX = Math.min(...tableItems.map(item => item.transform[4]));
+                const tableMinX = Math.min(...tableItems.map(item => (item as any).transform[4]));
 
                 // Now filter for text that is within the table's vertical boundaries but to the left of the table
                 const leftTextItems = textItems.filter(item => {
-                    const x = item.transform[4];
-                    const y = item.transform[5];
+                    const x = (item as any).transform[4];
+                    const y = (item as any).transform[5];
                     return y >= tableMinY && y <= tableMaxY && x < tableMinX;
                 });
 
                 // Extract and join the relevant text
-                const text = leftTextItems.map(item => item.str).join(' ');
+                const text = leftTextItems.map(item => (item as any).str).join(' ');
 
                 // Count room types
                 roomTypes.TWN += (text.match(/TWN/g) || []).length;

@@ -1,4 +1,4 @@
-export const calculateTotalPrice = (roomTypes, prices) => {
+export const calculateTotalPrice = (roomTypes: { [key: string]: number }, prices: { [key: string]: number }) => {
     let totalPrice = 0;
 
     totalPrice += roomTypes.TWN * prices.TWN;
@@ -7,4 +7,3 @@ export const calculateTotalPrice = (roomTypes, prices) => {
 
     return totalPrice;
 };
-

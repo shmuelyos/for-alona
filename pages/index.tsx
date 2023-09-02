@@ -4,10 +4,11 @@ import {HotelComponent} from '@/components/HotelComponent';
 
 const Home: React.FC = () => {
     const [hotelCount, setHotelCount] = useState<number>(1);
-    const [arrayOfTotalPrices, setArrayOfTotalPrices] = useState([])
+    const [arrayOfTotalPrices, setArrayOfTotalPrices] = useState<number[]>([]);
 
     const handleTotalPriceChange = (index: number, newPrice: number) => {
-        setArrayOfTotalPrices(prev => {
+        setArrayOfTotalPrices((prev: number[]) => {
+
             // Create a new array that is a copy of the previous array
             const newArray = [...prev];
 
